@@ -4,6 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/theme/ThemeToggle";
+import Link from "next/link";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -32,28 +33,28 @@ export default function Navbar({ className }: { className?: string }) {
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="/" className="font-mono text-sm sm:text-base tracking-widest">
+        <Link href="/" className="font-mono text-sm sm:text-base tracking-widest">
           <span className="text-accent">SOFTWARE</span> CLUB
-        </a>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="text-sm text-foreground hover:opacity-90 transition-opacity"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
-          <a
+          <Link
             href="/#contact"
             className={cn(
               "ml-2 inline-flex items-center justify-center rounded-md font-medium border border-border bg-accent text-accent-foreground hover:opacity-90 h-9 px-3 text-sm"
             )}
           >
             Join Us
-          </a>
+          </Link>
           <ThemeToggle className="ml-2" />
         </nav>
 
@@ -70,22 +71,22 @@ export default function Navbar({ className }: { className?: string }) {
         <div className="md:hidden border-t border-border bg-background/90 backdrop-blur">
           <div className="px-4 py-4 flex flex-col gap-3">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="py-2 text-sm text-foreground hover:opacity-90"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
-            <a
+            <Link
               href="/#contact"
               className={cn(
                 "mt-1 inline-flex items-center justify-center rounded-md font-medium border border-border bg-accent text-accent-foreground hover:opacity-90 h-9 px-3 text-sm"
               )}
             >
               Join Us
-            </a>
+            </Link>
             <div className="pt-2">
               <ThemeToggle />
             </div>

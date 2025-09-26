@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils";
 
 const MOVEMENT_DAMPING = 1400;
 const ACCENT: [number, number, number] = [0, 1, 136 / 255];
-// Dark green palette
-const BASE_DARK_GREEN: [number, number, number] = [0.05, 0.22, 0.14]; // ~rgb(13,56,36)
 
 export const GLOBE_CONFIG: COBEOptions = {
   width: 800,
@@ -48,8 +46,8 @@ export function Globe({
   className?: string;
   config?: COBEOptions;
 }) {
-  let phi = 0;
-  let width = 0;
+  const phiRef = useRef(0);
+  const widthRef = useRef(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef(0);
@@ -125,7 +123,7 @@ export function Globe({
   useEffect(() => {
     const onResize = () => {
       if (canvasRef.current) {
-        width = canvasRef.current.offsetWidth;
+        widthRef.current = canvasRef.current.offsetWidth;
       }
     };
 
@@ -135,13 +133,13 @@ export function Globe({
     const effective = config ?? getConfig(theme);
     const globe = createGlobe(canvasRef.current!, {
       ...effective,
-      width: width * 2,
-      height: width * 2,
+      width: widthRef.current * 2,
+      height: widthRef.current * 2,
       onRender: (state) => {
-        if (!pointerInteracting.current) phi += 0.005;
-        state.phi = phi + rs.get();
-        state.width = width * 2;
-        state.height = width * 2;
+        if (!pointerInteracting.current) phiRef.current += 0.005;
+        state.phi = phiRef.current + rs.get();
+        state.width = widthRef.current * 2;
+        state.height = widthRef.current * 2;
       },
     });
 

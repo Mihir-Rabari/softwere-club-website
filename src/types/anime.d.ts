@@ -1,9 +1,11 @@
 declare module "animejs" {
-  const anime: any;
+  type AnimeExport = ((...args: unknown[]) => unknown) & Record<string, unknown>;
+  const anime: AnimeExport;
   export default anime;
 }
 
 declare module "animejs/lib/anime.es.js" {
-  const anime: any;
+  type AnimeExport = ((...args: unknown[]) => unknown) & Record<string, unknown>;
+  const anime: AnimeExport;
   export default anime;
 }

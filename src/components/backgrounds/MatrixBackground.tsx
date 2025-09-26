@@ -42,7 +42,6 @@ export default function MatrixBackground({
 
     window.addEventListener("resize", handleResize);
 
-    const columnCount = Math.floor(width / density);
     const characters = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポ012345789ABCDEF";
     const chars = characters.split("");
 

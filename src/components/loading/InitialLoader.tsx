@@ -7,11 +7,10 @@ export default function InitialLoader() {
   const [visible, setVisible] = React.useState(true);
 
   React.useEffect(() => {
-    const MIN_DURATION_MS = 2500; // at least 3s
+    const MIN_DURATION_MS = 2500; // at least ~3s
     const FALLBACK_EXTRA_MS = 7000; // hide even if load never fires (total ~10s max)
     const start = Date.now();
     let hideTimeout: number | undefined;
-    let fallbackTimeout: number | undefined;
 
     const scheduleHideAfterMin = () => {
       const elapsed = Date.now() - start;
@@ -29,14 +28,14 @@ export default function InitialLoader() {
     }
 
     // Final safety: ensure it will close even if the load event never fires
-    fallbackTimeout = window.setTimeout(() => {
+    const fallbackTimeout = window.setTimeout(() => {
       scheduleHideAfterMin();
     }, MIN_DURATION_MS + FALLBACK_EXTRA_MS);
 
     return () => {
       window.removeEventListener("load", onLoad);
       if (hideTimeout) window.clearTimeout(hideTimeout);
-      if (fallbackTimeout) window.clearTimeout(fallbackTimeout);
+      window.clearTimeout(fallbackTimeout);
     };
   }, []);
 

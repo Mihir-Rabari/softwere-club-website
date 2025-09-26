@@ -6,6 +6,9 @@ import { cn } from "@/lib/utils";
 import { Globe } from "@/components/magicui/globe";
 import { LineShadowText } from "@/components/magicui/line-shadow-text";
 import { TextReveal } from "@/components/magicui/text-reveal";
+import Link from "next/link";
+
+type CSSVars = React.CSSProperties & { [key: string]: string | number | undefined };
 
 export default function Hero() {
   return (
@@ -22,7 +25,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            style={{ ["--animate-line-shadow" as any]: "line-shadow 30s linear infinite" }}
+            style={{ "--animate-line-shadow": "line-shadow 30s linear infinite" } as CSSVars}
           >
             Where Coding Meets Creativity
           </LineShadowText>
@@ -41,20 +44,20 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <a
+            <Link
               href="#contact"
               className={cn(
                 "inline-flex items-center justify-center rounded-md font-medium border border-border bg-accent text-accent-foreground hover:opacity-90 h-12 px-6 text-base"
               )}
             >
               Join the Club
-            </a>
-            <a
+            </Link>
+            <Link
               href="/gallery"
               className="inline-flex items-center justify-center rounded-md font-medium border border-border bg-transparent text-foreground hover:bg-muted h-12 px-6 text-base"
             >
               View Gallery
-            </a>
+            </Link>
           </motion.div>
           </div>
 

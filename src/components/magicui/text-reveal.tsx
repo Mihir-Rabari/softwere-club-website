@@ -6,14 +6,14 @@ import { cn } from "@/lib/utils";
 
 export function TextReveal({
   children,
-  as: Component = "p",
+  as = "p",
   className,
   stagger = 0.045,
   delay = 0,
   y = 8,
 }: {
   children: string;
-  as?: React.ElementType;
+  as?: "p" | "span" | "div";
   className?: string;
   stagger?: number;
   delay?: number;
@@ -34,7 +34,8 @@ export function TextReveal({
     show: { opacity: 1, y: 0 },
   };
 
-  const MotionWrapper: any = motion.create(Component as any);
+  const MotionWrapper =
+    as === "span" ? motion.span : as === "div" ? motion.div : motion.p;
 
   return (
     <MotionWrapper
